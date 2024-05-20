@@ -1,1 +1,20 @@
-<p>users works!</p>
+
+<app-navbar></app-navbar>
+
+  <main class="flex flex-col sm:flex-row justify-center items-center" style="margin-bottom: 60px;">
+    <!-- Lista de usuarios -->
+    <div class="w-full sm:w-2/3 p-4 justify-center">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div *ngFor="let user of users" class="card bg-white rounded-lg shadow-lg p-4">
+          <div class="p-4 flex flex-col justify-center">
+            <h2 class="text-lg sm:text-xl font-bold mb-2 text-center">{{ user.name }} {{ user.lastName }}</h2>
+            <p class="text-sm sm:text-md mb-2 text-center">{{ user.email }}</p>
+            <p class="text-xs sm:text-sm mb-2 text-center">{{ user.phoneNumber }}</p>
+          </div>
+        </div>
+      </div>
+      <ng-template #noUsers>
+        <p>No se encontraron usuarios.</p>
+      </ng-template>
+    </div>
+  </main>
