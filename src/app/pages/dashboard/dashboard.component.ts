@@ -42,11 +42,11 @@ export class DashboardComponent implements OnInit {
   }
   
 
-  openEditModal(post: any) {
-    this.selectedPost = post;
-    this.editedPost = { ...post }; // Asignar una copia del post seleccionado a editedPost
-    this.showModal = true;
-  }
+  // openEditModal(post: any) {
+  //   this.selectedPost = post;
+  //   this.editedPost = { ...post }; // Asignar una copia del post seleccionado a editedPost
+  //   this.showModal = true;
+  // }
 
   async savePost(updatedPost: any) {
     try {
