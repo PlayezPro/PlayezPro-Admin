@@ -1,0 +1,35 @@
+<app-navbar/>
+
+<div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10 mt-28" >
+    <table class="w-full table-fixed">
+        <thead>
+            <tr class="bg-gray-100">
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Name</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Last Name</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">User Name</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">email</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Phone Number</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Role</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Ceation Date</th>
+                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bg-white" *ngIf="users.length">
+            <tr *ngFor="let user of users">
+                <td class="py-4 px-6 border-b border-gray-200">{{user.name}}</td>
+                <td class="py-4 px-6 border-b border-gray-200 truncate">{{user.lastName}}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{user.userName}}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{user.email}}</td>
+                <td class="py-4 px-6 border-b border-gray-200">{{user.phoneNumber}}</td>
+                <td class="py-4 px-6 border-b border-gray-200">
+                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{{user.roles}}</span>
+                </td>
+                <td class="py-4 px-6 border-b border-gray-200">{{user.createdAt}}</td>
+                <td class="px-6 py-4 whitespace-nowrap  text-sm font-medium">
+                    <a class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    <a class="ml-2 text-red-600 hover:text-red-900" (click)="deleteUser(user._id)">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
