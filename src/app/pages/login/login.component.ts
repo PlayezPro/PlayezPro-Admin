@@ -61,17 +61,16 @@ onSubmit() {
 
               // Ocultar la alerta después de 3 segundos
               setTimeout(() => {
-                  this.AlertMessage = false;
-              }, 3000);
+                  this.showAlert = false;
+              }, 2000);
           }
       );
     } else {
         this.alertMessage = 'Por favor, complete todos los campos correctamente.';
-        this.AlertMessage = true; // Mostrar la alerta
         this.showAlert = true;
         setTimeout(() => {
-            this.AlertMessage = false;
-        }, 3000);
+            this.showAlert = false;
+        }, 2000);
     }
   }
 
