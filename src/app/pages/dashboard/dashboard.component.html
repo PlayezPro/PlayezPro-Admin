@@ -1,28 +1,29 @@
 <app-navbar></app-navbar>
-<table class="min-w-full divide-y divide-gray-200 overflow-x-auto mt-28">
-    <thead class="bg-gray-50">
+
+<table class="min-w-full divide-y bg-secondary divide-primary overflow-x-auto mt-28 shadow-md">
+    <thead class="bg-secondary text-custom-dark">
         <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium ext-custom-dark uppercase tracking-wider">
+                Descripción
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Title
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-custom-dark uppercase tracking-wider">
+                Título
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-custom-dark uppercase tracking-wider">
+                Username
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Role
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-custom-dark uppercase tracking-wider">
+                Fecha/Hora
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-custom-dark uppercase tracking-wider">
                 Email
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-custom-dark uppercase tracking-wider">
                 Actions
             </th>
         </tr>
     </thead>
-    <tbody class="bg-white divide-y divide-gray-200" *ngIf="posts.length">
+    <tbody class="bg-custom-white divide-y divide-secondary shadow-md mx-50" *ngIf="posts.length">
         <tr *ngFor="let post of posts">
             <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
@@ -33,33 +34,33 @@
                           </ng-template>
                     </div>
                     <div class="ml-4">
-                        <div class="text-sm font-medium text-gray-900">
+                        <div class="text-sm font-medium text-custom-dark">
                             {{post.title}}
                         </div>
-                        <div class="text-sm text-gray-500">
+                        <div class="text-sm text-custom-dark">
                             {{post.description}}
                         </div>
                     </div>
                 </div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{post.description}}</div>
-                <div class="text-sm text-gray-500">{{post.category}}</div>
+                <div class="text-sm ">{{post.description}}</div>
+                <div class="text-sm text-custom-dark">{{post.category}}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-secondary text-custom-dark">
                     {{ post.user?.[0]?.name }}
                 </span>
             </td>            
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-6 py-4 whitespace-nowrap text-sm ">
                 {{post.Created_At}}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-custom-dark">
                 jose
             </td>
             <td class="px-6 py-4 whitespace-nowrap  text-sm font-medium">
                 <a class="text-indigo-600 hover:text-indigo-900" (click)="openEditModal(post)">Edit</a>
-                <a class="ml-2 text-red-600 hover:text-red-900" (click)="deletePost(post.id)">Delete</a>
+                <a class="ml-2 text-red-700 hover:text-custom-white hover:bg-red-700 hover: hover:rounded-full hover:px-1" (click)="deletePost(post.id)">Eliminar</a>
             </td>
         </tr>
     </tbody>
