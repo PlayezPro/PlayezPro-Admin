@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   posts: any[] = [];
   selectedPost: any = null;
   showModal: boolean = false;
+  showDeleteModal: boolean = false; // Agrega esta variable
   editedPost: any = {}
 
   isImage(file: string): boolean {
@@ -28,7 +29,6 @@ export class DashboardComponent implements OnInit {
     this.loadPosts();
   }
 
-  
   async loadPosts() {
     try {
       this.posts = await this.postService.getAllPost();
@@ -40,7 +40,6 @@ export class DashboardComponent implements OnInit {
       console.error('Error al cargar los posts:', error);
     }
   }
-  
 
   openEditModal(post: any) {
     this.selectedPost = post;
@@ -63,12 +62,23 @@ export class DashboardComponent implements OnInit {
     this.selectedPost = null;
   }
 
-  async deletePost(postId: number) {
+  openDeleteModal(post: any) { // Función para abrir el modal de confirmación de eliminación
+    this.selectedPost = post;
+    this.showDeleteModal = true;
+  }
+
+  async confirmDelete() { // Función para confirmar la eliminación del post
     try {
-      await this.postService.deletePost(postId);
+      await this.postService.deletePost(this.selectedPost._id);
       this.loadPosts(); // Recarga los posts después de borrar uno
+      this.closeDeleteModal();
     } catch (error) {
-      console.error(`Error al borrar el post con id ${postId}:`, error);
+      console.error(`Error al borrar el post con id ${this.selectedPost._id}:`, error);
     }
+  }
+
+  closeDeleteModal() { // Función para cerrar el modal de confirmación de eliminación
+    this.showDeleteModal = false;
+    this.selectedPost = null;
   }
 }
