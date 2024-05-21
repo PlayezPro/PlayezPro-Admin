@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
 
   async savePost(updatedPost: any) {
     try {
-      await this.postService.editPost(this.selectedPost.id, updatedPost);
+      await this.postService.editPost(this.selectedPost._id, updatedPost);
       this.showModal = false;
       this.loadPosts(); // Recarga los posts después de la edición
     } catch (error) {
