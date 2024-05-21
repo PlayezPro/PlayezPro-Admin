@@ -22,8 +22,13 @@
                 <td class="py-4 px-6 border-b border-gray-200">{{user.email}}</td>
                 <td class="py-4 px-6 border-b border-gray-200">{{user.phoneNumber}}</td>
                 <td class="py-4 px-6 border-b border-gray-200">
-                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">{{user.roles}}</span>
-                </td>
+                  <ng-container *ngIf="user.roles == '6639dbc70fc2fd0ef9038cdd'">
+                      <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">ADMIN</span>
+                  </ng-container>
+                  <ng-container *ngIf="user.roles == '6639dbc70fc2fd0ef9038cde'">
+                      <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">PLAYER</span>
+                  </ng-container>
+              </td>                            
                 <td class="py-4 px-6 border-b border-gray-200">{{user.createdAt}}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <a class="text-indigo-600 hover:text-indigo-900 cursor-pointer" (click)="openEditModal(user)">Edit</a>
@@ -68,10 +73,6 @@
                 <div class="mb-4">
                   <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
                   <input type="text" id="phoneNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.phoneNumber" name="phoneNumber">
-                </div>
-                <div class="mb-4">
-                  <label class="block text-gray-700 text-sm font-bold mb-2" for="roles">Role</label>
-                  <input type="text" id="roles" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.roles" name="roles">
                 </div>
                 <div class="flex items-center justify-end">
                   <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="closeModal()">Cancel</button>
