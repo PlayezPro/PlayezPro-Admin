@@ -1,19 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { inject } from '@angular/core';
+import { Router } from "@angular/router";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AdminAuthGuard {
+export const blockPage = () => {
+    const router = inject(Router);
 
-  constructor(private router: Router) {}
+    const role = localStorage.getItem('role');
 
-  canActivate(): boolean {
-    if (localStorage.getItem('token de admin')) { // Aquí deberías ajustar el nombre del token según tu aplicación
-      return true; // Permitir acceso si el token está presente
+    if (role && role === '6639dbc70fc2fd0ef9038cdd') {
+        return true;
     } else {
-      this.router.navigate(['']); // Redirigir al usuario a la página de inicio de sesión si no hay token
-      return false;
+        router.navigate(['/']);
+        return false;
     }
-  }
 }

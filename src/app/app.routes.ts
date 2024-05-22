@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { AdminAuthGuard } from './guards/admin-auth.guard';
 import { UsersComponent } from './pages/users/users.component';
+import { blockPage } from './guards/admin-auth.guard';
 
 export const routes: Routes = [
     {
@@ -11,10 +11,12 @@ export const routes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate : [blockPage]
     },
     {
         path: 'user',
-        component: UsersComponent
+        component: UsersComponent,
+        canActivate : [blockPage]
     },
 ];

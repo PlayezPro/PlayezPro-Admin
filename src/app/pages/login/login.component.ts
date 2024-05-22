@@ -4,7 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { UsersService } from '../../services/user.service';
+import { UsersService } from '../../services/users/user.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -46,7 +47,13 @@ onSubmit() {
       this.userService.loginUser(credentials).subscribe(
           response => {
               console.log('Login con éxito:', response);
-              localStorage.setItem('token de admin',response.token)
+              localStorage.setItem('Token',response.token)
+              const tokenOne = localStorage.getItem('Token')
+              if(tokenOne){
+                const decodedToken: any = jwtDecode(tokenOne);
+                localStorage.setItem('users_Id', decodedToken.id)
+                localStorage.setItem('role', decodedToken.roles)
+              }
               this.alertMessage = 'Bienvenido, Admin';
               this.AlertMessage = true;
               setTimeout(() => {
