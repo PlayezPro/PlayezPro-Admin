@@ -7,6 +7,9 @@ import { Observable } from "rxjs";
 })
 
 export class UsersService {
+
+    private usersApiUrl: string = 'http://localhost:3000/user'
+
     constructor(private http: HttpClient) { }
 
     createUser(newUser: any): Observable<any> {
@@ -28,7 +31,22 @@ export class UsersService {
             password: credentials.password,
         };
         return this.http.post('http://localhost:3000/auth/signin', loginData)
-
-
     }
+
+    getAllUsers(): Observable<any> {
+        return this.http.get(this.usersApiUrl);
+      }
+    
+      getUserById(userId: string): Observable<any> {
+        return this.http.get(`${this.usersApiUrl}/${userId}`);
+      }
+    
+      updateUser(userId: string, updatedUser: any): Observable<any> {
+        return this.http.put(`${this.usersApiUrl}/${userId}`, updatedUser);
+      }
+    
+      deleteUser(userId: string): Observable<any> {
+        return this.http.delete(`${this.usersApiUrl}/${userId}`);
+      }
+      
 }
