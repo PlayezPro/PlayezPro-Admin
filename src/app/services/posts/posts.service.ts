@@ -5,8 +5,8 @@ import axios, { AxiosResponse } from 'axios';
   providedIn: 'root'
 })
 export class PostServiceService {
-  private postsApiUrl: string = 'http://localhost:3000/posts'
-  private usersApiUrl: string = 'http://localhost:3000/user'
+  private postsApiUrl: string = 'https://playezpro-server.onrender.com/posts'
+  private usersApiUrl: string = 'https://playezpro-server.onrender.com/user'
 
   constructor() { }
 

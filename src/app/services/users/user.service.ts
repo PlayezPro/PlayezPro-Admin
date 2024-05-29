@@ -8,7 +8,7 @@ import { Observable } from "rxjs";
 
 export class UsersService {
 
-    private usersApiUrl: string = 'http://localhost:3000/user'
+    private usersApiUrl: string = 'https://playezpro-server.onrender.com/user'
 
     constructor(private http: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class UsersService {
             password: newUser.password,
             repeatPassword: newUser.repeatPassword
         };
-        return this.http.post('http://localhost:3000/auth/signup', userData)
+        return this.http.post('https://playezpro-server.onrender.com/auth/signup', userData)
     }
 
     loginUser(credentials: any): Observable<any> {
@@ -30,7 +30,7 @@ export class UsersService {
             email: credentials.email,
             password: credentials.password,
         };
-        return this.http.post('http://localhost:3000/auth/signin', loginData)
+        return this.http.post('https://playezpro-server.onrender.com/auth/signin', loginData)
     }
 
     getAllUsers(): Observable<any> {
