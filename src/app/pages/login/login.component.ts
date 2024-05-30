@@ -34,7 +34,7 @@ get password(){
 
   constructor(private router: Router, private userService: UsersService ) {}
   navigateToDash() {
-    this.router.navigate(["/dashboard"])
+    this.router.navigate(["/users"])
 }
 
 onSubmit() {

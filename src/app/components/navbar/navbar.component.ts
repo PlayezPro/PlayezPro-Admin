@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { UsersComponent } from '../users/users.component';
 import { PostsComponent } from '../posts/posts.component';
 
@@ -7,7 +7,7 @@ import { PostsComponent } from '../posts/posts.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [UsersComponent, PostsComponent, RouterLink],
+  imports: [UsersComponent, PostsComponent, RouterLink, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

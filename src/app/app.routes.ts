@@ -10,12 +10,12 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'dashboard',
+        path: 'posts',
         component: DashboardComponent,
         canActivate : [blockPage]
     },
     {
-        path: 'user',
+        path: 'users',
         component: UsersComponent,
         canActivate : [blockPage]
     },
