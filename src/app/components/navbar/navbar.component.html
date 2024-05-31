@@ -7,19 +7,19 @@
             <span class="text-custom-white uppercase">ADMINISTRACIÓN</span>
         </div>
         <nav class="navbar flex-1 px-3 py-6 bg-body-gradient">
-            <a class="flex items-start p-1 text-primary hover:bg-custom-dark hover:text-custom-white" routerLink="/posts" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-custom-white bg-transparent border-gray-300 rounded-lg p-1">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                    <path d="M7 3.5A1.5 1.5 0 0 1 8.5 2h3.879a1.5 1.5 0 0 1 1.06.44l3.122 3.12A1.5 1.5 0 0 1 17 6.622V12.5a1.5 1.5 0 0 1-1.5 1.5h-1v-3.379a3 3 0 0 0-.879-2.121L10.5 5.379A3 3 0 0 0 8.379 4.5H7v-1Z" />
-                    <path d="M4.5 6A1.5 1.5 0 0 0 3 7.5v9A1.5 1.5 0 0 0 4.5 18h7a1.5 1.5 0 0 0 1.5-1.5v-5.879a1.5 1.5 0 0 0-.44-1.06L9.44 6.439A1.5 1.5 0 0 0 8.378 6H4.5Z" />
-                </svg>
-                POSTS
-            </a>
-            <a class="flex items-center p-1 text-primary hover:bg-custom-dark hover:text-custom-white" routerLink="/users" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="text-custom-white bg-transparent border-gray-300 rounded-lg p-1">
+            <a [ngClass]="{ 'active-link': isUsersActive }" class="flex items-center p-1 text-primary hover:bg-custom-dark hover:text-custom-white" (click)="NavigateToUsers()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
                     <path d="M10 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM1.49 15.326a.78.78 0 0 1-.358-.442 3 3 0 0 1 4.308-3.516 6.484 6.484 0 0 0-1.905 3.959c-.023.222-.014.442.025.654a4.97 4.97 0 0 1-2.07-.655ZM16.44 15.98a4.97 4.97 0 0 0 2.07-.654.78.78 0 0 0 .357-.442 3 3 0 0 0-4.308-3.517 6.484 6.484 0 0 1 1.907 3.96 2.32 2.32 0 0 1-.026.654ZM18 8a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM5.304 16.19a.844.844 0 0 1-.277-.71 5 5 0 0 1 9.947 0 .843.843 0 0 1-.277.71A6.975 6.975 0 0 1 10 18a6.974 6.974 0 0 1-4.696-1.81Z" />
                 </svg>                 
                 USUARIOS
             </a>
+            <a [ngClass]="{ 'active-link': isPostsActive }" class="flex items-start p-1 text-primary hover:bg-custom-dark hover:text-custom-white" (click)="NavigateToPosts()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                    <path d="M7 3.5A1.5 1.5 0 0 1 8.5 2h3.879a1.5 1.5 0 0 1 1.06.44l3.122 3.12A1.5 1.5 0 0 1 17 6.622V12.5a1.5 1.5 0 0 1-1.5 1.5h-1v-3.379a3 3 0 0 0-.879-2.121L10.5 5.379A3 3 0 0 0 8.379 4.5H7v-1Z" />
+                    <path d="M4.5 6A1.5 1.5 0 0 0 3 7.5v9A1.5 1.5 0 0 0 4.5 18h7a1.5 1.5 0 0 0 1.5-1.5v-5.879a1.5 1.5 0 0 0-.44-1.06L9.44 6.439A1.5 1.5 0 0 0 8.378 6H4.5Z" />
+                </svg>
+                POSTS
+            </a>            
         </nav>
         <div class="px-2 py-2">
             <a class="inline-flex items-center justify-center w-full bg-custom-dark py-2 text-s text-primary rounded-lg shadow-xl hover:bg-custom-dark hover:text-custom-white" href="/login">LOG OUT</a>

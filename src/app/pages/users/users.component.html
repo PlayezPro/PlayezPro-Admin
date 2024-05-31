@@ -1,86 +1,91 @@
-<app-navbar/>
+<app-navbar></app-navbar>
 
-<div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10 mt-28">
-  <table class="w-full table-fixed">
-    <thead>
-      <tr class="bg-custom-dark text-white">
-        <th class="w-1/4 py-4 px-6 text-left font-medium">NOMBRE</th>
-        <th class="w-1/4 py-4 px-6 text-left font-medium">APELLIDO</th>
-        <th class="w-1/4 py-4 px-6 text-left font-medium">USERNAME</th>
-        <th class="w-1/4 py-4 px-6 text-left font-medium">EMAIL</th>
-        <th class="w-1/4 py-4 px-6 text-left font-medium">NÚMERO MOVIL</th>
-        <th class="w-1/4 py-4 px-6 text-left font-medium">ROL</th>
-        <th class="w-1/4 py-4 px-6 text-left font-medium">SE UNIÓ</th>
-        <th class="w-1/4 py-4 px-6 text-left font-medium">ACTIONS</th>
-      </tr>
-    </thead>
-    <tbody class="bg-white" *ngIf="users.length">
-      <tr *ngFor="let user of users" class="bg-custom-dark text-white divide-y divide-primary">
-        <td class="py-4 px-6 border-b border-gray-200">{{user.name}}</td>
-        <td class="py-4 px-6 border-b border-gray-200">{{user.lastName}}</td>
-        <td class="py-4 px-6 border-b border-gray-200">{{user.userName}}</td>
-        <td class="py-4 px-6 border-b border-gray-200">{{user.email}}</td>
-        <td class="py-4 px-6 border-b border-gray-200">{{user.phoneNumber}}</td>
-        <td class="py-4 px-6 border-b border-gray-200">
-          <ng-container *ngIf="user.roles == '6639dbc70fc2fd0ef9038cdd'">
-            <span class="bg-primary text-custom-dark py-1 px-2 rounded-full text-xs">ADMIN</span>
-          </ng-container>
-          <ng-container *ngIf="user.roles == '6639dbc70fc2fd0ef9038cde'">
-            <span class="bg-custom-white text-custom-dark py-1 px-2 rounded-full text-xs">PLAYER</span>
-          </ng-container>
-        </td>
-        <td class="py-4 px-6 border-b border-gray-200">{{user.createdAt}}</td>
-        <td class="px-6 py-4 whitespace-nowrap">
-          <a class="text-indigo-600 hover:text-indigo-900 cursor-pointer" (click)="openEditModal(user)">EDIT</a>
-          <a class="ml-2 text-red-600 hover:text-red-900 cursor-pointer" (click)="openDeleteModal(user._id)">DELETE</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container w-full mx-auto mt-10">
+  <div class="container px-5 ml-8">
+    <div class="border-b mt-10">
+      <!-- Tabla completa -->
+      <table class="w-full rounded-full">
+        <thead class="sticky top-0 z-10 overflow-x-auto shadow-xl pl-4 mb-2 bg-custom-white">
+          <tr>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Nombre</th>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Apellido</th>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Username</th>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Email</th>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Número móvil</th>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Rol</th>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Se unió</th>
+            <th scope="col" class="px-2 py-3 text-left text-xs font-medium text-custom-black uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-terciary overflow-x-auto rounded-b-lg divide-y divide-primary text-custom-white mt-2" *ngIf="users.length">
+          <tr *ngFor="let user of users">
+            <td class="px-2 py-4 whitespace-nowrap">{{user.name}}</td>
+            <td class="px-2 py-4 whitespace-nowrap">{{user.lastName}}</td>
+            <td class="px-2 py-4 whitespace-nowrap">{{user.userName}}</td>
+            <td class="px-2 py-4 whitespace-nowrap">{{user.email}}</td>
+            <td class="px-2 py-4 whitespace-nowrap">{{user.phoneNumber}}</td>
+            <td class="px-2 py-4 whitespace-nowrap">
+              <ng-container *ngIf="user.roles == '6639dbc70fc2fd0ef9038cdd'">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-primary text-custom-dark">Admin</span>
+              </ng-container>
+              <ng-container *ngIf="user.roles == '6639dbc70fc2fd0ef9038cde'">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-custom-white text-custom-dark">Player</span>
+              </ng-container>
+            </td>
+            <td class="px-2 py-4 whitespace-nowrap">{{user.createdAt}}</td>
+            <td class="px-2 py-4 text-sm font-semibold text-center">
+              <div class="inline-block">
+                <a class="block mb-2 text-primary hover:rounded-lg" (click)="openEditModal(user)">Edit</a>
+                <a class="text-red-700 hover:bg-transparent hover:border-red-700" (click)="openDeleteModal(user._id)">Delete</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <!-- Edit Modal -->
 <div class="fixed z-10 inset-0 overflow-y-auto" *ngIf="isEditModalOpen">
-  <div class="flex items-center justify-center min-h-screen">
-    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-    </div>
-    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+  <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div class="sm:flex sm:items-start">
+          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+          </div>
           <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-              Edit User
-            </h3>
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Edición</h3>
             <div class="mt-2">
               <form (ngSubmit)="updateUser()">
                 <div class="mb-4">
-                  <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Name</label>
-                  <input type="text" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.name" name="name">
+                  <label for="name" class="block text-gray-700 font-bold mb-2">Nombre</label>
+                  <input type="text" id="name" [(ngModel)]="selectedUser.name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 <div class="mb-4">
-                  <label class="block text-gray-700 text-sm font-bold mb-2" for="lastName">Last Name</label>
-                  <input type="text" id="lastName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.lastName" name="lastName">
+                  <label for="lastName" class="block text-gray-700 font-bold mb-2">Apelido</label>
+                  <input type="text" id="lastName" [(ngModel)]="selectedUser.lastName" name="lastName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 <div class="mb-4">
-                  <label class="block text-gray-700 text-sm font-bold mb-2" for="userName">User Name</label>
-                  <input type="text" id="userName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.userName" name="userName">
+                  <label for="userName" class="block text-gray-700 font-bold mb-2">Username</label>
+                  <input type="text" id="userName" [(ngModel)]="selectedUser.userName" name="userName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 <div class="mb-4">
-                  <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-                  <input type="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.email" name="email">
+                  <label for="email" class="block text-gray-700 font-bold mb-2">Email</label>
+                  <input type="email" id="email" [(ngModel)]="selectedUser.email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
                 <div class="mb-4">
-                  <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
-                  <input type="text" id="phoneNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.phoneNumber" name="phoneNumber">
+                  <label for="phoneNumber" class="block text-gray-700 font-bold mb-2">Número de Tlfn</label>
+                  <input type="text" id="phoneNumber" [(ngModel)]="selectedUser.phoneNumber" name="phoneNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                 </div>
-                <!-- <div class="mb-4">
-                  <label class="block text-gray-700 text-sm font-bold mb-2" for="roles">Role</label>
-                  <input type="text" id="roles" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="selectedUser.roles" name="roles">
-                </div> -->
                 <div class="flex items-center justify-end">
-                  <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" (click)="closeModal()">Cancel</button>
-                  <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save</button>
+                  <button type="button" class="bg-primary hover:bg-secondary text-custom-dark py-2 px-2 rounded-md mr-4" (click)="closeModal()">Cancelar</button>
+                  <button type="submit" class="hover:bg-secondary text-custom-dark py-2 px-2 rounded-md">Actualizar</button>
                 </div>
               </form>
             </div>
@@ -93,26 +98,29 @@
 
 <!-- Delete Modal -->
 <div class="fixed z-10 inset-0 overflow-y-auto" *ngIf="isDeleteModalOpen">
-  <div class="flex items-center justify-center min-h-screen">
-    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-    </div>
-    <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+  <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
       <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
         <div class="sm:flex sm:items-start">
+          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+            <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+          </div>
           <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-              Confirm Delete
-            </h3>
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Confirmar Eliminación</h3>
             <div class="mt-2">
-              <p>¿Estás seguro de eliminar este usuario?</p>
+              <p>¿Estás seguro de eliminar este usuario? <br>
+              Esta acción no es reversible</p>
             </div>
           </div>
         </div>
       </div>
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm" (click)="confirmDelete()">Delete</button>
-        <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" (click)="closeDeleteModal()">Cancel</button>
+        <button type="button" class="bg-red-500 hover:bg-red-900 hover:text-custom-white text-custom-dark py-2 px-2 rounded-md" (click)="confirmDelete()">Eliminar</button>
+        <button type="button" class="bg-primary hover:bg-secondary text-custom-dark py-2 px-2 rounded-md mr-4" (click)="closeDeleteModal()">Cancelar</button>
       </div>
     </div>
   </div>

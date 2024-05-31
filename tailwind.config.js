@@ -1,7 +1,6 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{html,ts}",
+    "./src/**/*.{html,ts,js}",
   ],
   theme: {
     extend: {
@@ -10,6 +9,7 @@ module.exports = {
         'custom-white': '#F2F2F2',
         'primary': '#E7FF0D',
         'secondary': '#BBBF39',
+        'terciary': '#2A2D32',
       },
       backgroundImage: theme => ({
         'body-gradient': 'linear-gradient(to bottom, #24272C, #000000)',

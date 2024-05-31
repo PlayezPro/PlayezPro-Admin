@@ -1,85 +1,74 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users/user.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
-  standalone:true,
-  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
+  standalone: true,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  imports: [ReactiveFormsModule, CommonModule]
 })
 export class LoginComponent {
-
-  get email(){
-    return this.formAdmin.get('email') as FormControl; 
-}
-get password(){
-    return this.formAdmin.get('password') as FormControl; 
-}
-
   formAdmin = new FormGroup({
     'email': new FormControl('', [Validators.required, Validators.email]),
     'password': new FormControl('', [Validators.required, Validators.minLength(8)])
-});
-  //Alertas
-  showAlert= false; 
+  });
+
+  showAlert = false; 
   alertMessage: string = '';
-  AlertMessage = false
 
   constructor(private router: Router, private userService: UsersService ) {}
-  navigateToDash() {
-    this.router.navigate(["/users"])
-}
 
-onSubmit() {
-  if (this.formAdmin.valid) {
+  navigateToDash() {
+    this.router.navigate(["/users"]);
+  }
+
+  onSubmit() {
+    if (this.formAdmin.valid) {
       const credentials = {
-          email: this.formAdmin.value.email,
-          password: this.formAdmin.value.password
+        email: this.formAdmin.value.email,
+        password: this.formAdmin.value.password
       };
 
       this.userService.loginUser(credentials).subscribe(
-          response => {
-              console.log('Login con éxito:', response);
-              localStorage.setItem('Token',response.token)
-              const tokenOne = localStorage.getItem('Token')
-              if(tokenOne){
-                const decodedToken: any = jwtDecode(tokenOne);
-                localStorage.setItem('users_id', decodedToken.id)
-                localStorage.setItem('role', decodedToken.roles)
-              }
-              this.alertMessage = 'Bienvenido, Admin';
-              this.AlertMessage = true;
-              setTimeout(() => {
-                  this.navigateToDash();
-              }, 2000);
-          },
-          error => {
-              console.error('Error al logear:', error);
-              this.alertMessage = 'Error en email/contraseña';
-              this.AlertMessage = true; // Mostrar la alerta
-              this.showAlert = true;
-
-              // Ocultar la alerta después de 3 segundos
-              setTimeout(() => {
-                  this.showAlert = false;
-              }, 2000);
+        response => {
+          console.log('Login con éxito:', response);
+          localStorage.setItem('Token', response.token);
+          const token = localStorage.getItem('Token');
+          if (token) {
+            const decodedToken: any = jwtDecode(token);
+            localStorage.setItem('users_id', decodedToken.id);
+            localStorage.setItem('role', decodedToken.roles);
+            this.alertMessage = `Bienvenido, Administrador`;
+            this.showAlert = true;
+            setTimeout(() => {
+              this.navigateToDash();
+            }, 2000);
           }
+        },
+        error => {
+          console.error('Error al logear:', error);
+          if (error.status === 401) {
+            this.alertMessage = 'Error en email/contraseña';
+          } else {
+            this.alertMessage = 'Ha ocurrido un error. Por favor, intenta nuevamente más tarde.';
+          }
+          this.showAlert = true;
+          setTimeout(() => {
+            this.showAlert = false;
+          }, 2000);
+        }
       );
     } else {
-        this.alertMessage = 'Por favor, complete todos los campos correctamente.';
-        this.showAlert = true;
-        setTimeout(() => {
-            this.showAlert = false;
-        }, 2000);
+      this.alertMessage = 'Por favor, complete todos los campos correctamente.';
+      this.showAlert = true;
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 2000);
     }
   }
-
-
 }
