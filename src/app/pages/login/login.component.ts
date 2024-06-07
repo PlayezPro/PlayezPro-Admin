@@ -53,7 +53,7 @@ export class LoginComponent {
         error => {
           console.error('Error al logear:', error);
           if (error.status === 401) {
-            this.alertMessage = 'Error en email/contraseña';
+            this.alertMessage = 'Credenciales Incorrectas';
           } else {
             this.alertMessage = 'Ha ocurrido un error. Por favor, intenta nuevamente más tarde.';
           }
