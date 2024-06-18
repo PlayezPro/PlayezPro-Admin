@@ -3,4 +3,5 @@
   publish = "dist/admin/browser"
 
 [functions]
+node_bundler = "esbuild"
   external_node_modules = ["events"]
