@@ -36,13 +36,15 @@ export class NavbarComponent implements OnInit {
 
   LogOut() {
     if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem('token de admin');
+      localStorage.removeItem('Token');
+      localStorage.removeItem('users_id');
+      localStorage.removeItem('role');
     } else {
       // Manejar el caso donde localStorage no está disponible
       console.warn('localStorage no está disponible en este entorno.');
       // Aquí podrías optar por otro manejo o simplemente no hacer nada si no es relevante
     }
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
   
 }
